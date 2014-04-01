@@ -1,52 +1,68 @@
 package com.yagasyants.courseraalgs.graph;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
-public class Graph {
+public class Graph<T> {
 	private List<List<Integer>> adjList;
 
-	public Graph(int numberOfVertices) {
+	private T[] arrayVertices;
+	private Map<T, Integer> mapIntToVertix;
+
+	public Graph(T[] arrayVertices) {
+		this.arrayVertices = arrayVertices;
+		fillMapIntToVertix();
+
 		adjList = new ArrayList<>();
 
-		for (int i = 0; i < numberOfVertices; i++) {
-			adjList.add(new ArrayList<Integer>());
+		for (int i = 0; i < arrayVertices.length; i++) {
+			adjList.add(new LinkedList<Integer>());
 		}
 	}
 
-	public Graph(String gStr) {
+	private void fillMapIntToVertix() {
+		mapIntToVertix = new HashMap<>();
+		for (int i = 0; i < arrayVertices.length; i++) {
+			mapIntToVertix.put(arrayVertices[i], i);
+		}
+	}
+
+	public Graph(T[] arrayVertices, String gStr, TypeParser<T> parser) {
+		this(arrayVertices);
 		String[] adjStrList = gStr.split("\n");
-		adjList = new ArrayList<>();
 
 		for (int i = 0; i < adjStrList.length; i++) {
 			String vString = adjStrList[i];
-			ArrayList<Integer> vList = extractVerticesFromLine(vString);
-			adjList.add(vList);
+			List<Integer> vList = adjList.get(i);
+			extractVerticesFromLine(vList, vString, parser);
 		}
 	}
 
-	private ArrayList<Integer> extractVerticesFromLine(String vString) {
-		ArrayList<Integer> vList = new ArrayList<Integer>();
+	private void extractVerticesFromLine(List<Integer> vList, String vString, TypeParser<T> parser) {
 		String vertices = vString.substring(vString.indexOf(":") + 1);
 		String[] arrayVertices = vertices.split(" ");
 		for (String vertex : arrayVertices) {
 			String vertexTrim = vertex.trim();
-			if (vertex.length() > 0) {
-				vList.add(Integer.valueOf(vertexTrim));
+			if (vertexTrim.length() > 0) {
+				T vertexType = parser.parse(vertexTrim);
+				vList.add(mapIntToVertix.get(vertexType));
 			}
 		}
-		return vList;
 	}
 
 	public int getNumberOfVertices() {
 		return adjList.size();
 	}
 
-	public void addEgde(Integer i, Integer j) {
-		adjList.get(i).add(j);
-		adjList.get(j).add(i);
+	public void addEgde(T left, T right) {
+		int leftIndex = mapIntToVertix.get(left);
+		int rightIndex = mapIntToVertix.get(right);
+
+		adjList.get(leftIndex).add(rightIndex);
+		adjList.get(rightIndex).add(leftIndex);
 	}
 
 	public Iterable<Integer> adj(int i) {
@@ -63,12 +79,20 @@ public class Graph {
 		return stringBuilder.toString();
 	}
 
-	public List<Integer> depthFirst() {
+	public List<T> depthFirst() {
 		boolean[] visited = new boolean[adjList.size()];
 		List<Integer> listVisits = new ArrayList<>();
 		depthFirstVisit(0, visited, listVisits);
-		
-		return listVisits;
+
+		return convert(listVisits);
+	}
+	
+	private List<T> convert(List<Integer> listVisits){
+		List<T> listT = new ArrayList<>();
+		for(Integer index : listVisits){
+			listT.add(arrayVertices[index]);
+		}
+		return listT;
 	}
 
 	private void depthFirstVisit(Integer visit, boolean[] visited, List<Integer> listVisits) {
