@@ -10,10 +10,10 @@ public class DepthFirstSearch {
 		this.graph = graph;
 	}
 	
-	public List<Integer> runSearch() {
+	public List<Integer> runSearch(int vertex) {
 		boolean[] visited = new boolean[graph.getNumberOfVertices()];
 		List<Integer> listVisits = new ArrayList<>();
-		depthFirstVisit(0, visited, listVisits);
+		depthFirstVisit(vertex, visited, listVisits);
 
 		return listVisits;
 	}

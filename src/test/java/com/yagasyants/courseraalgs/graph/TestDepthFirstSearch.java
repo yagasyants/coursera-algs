@@ -15,7 +15,7 @@ public class TestDepthFirstSearch {
 		
 		DepthFirstSearch dfs = new DepthFirstSearch(graph); 
 		
-		List<Integer> listVertices = dfs.runSearch();
+		List<Integer> listVertices = dfs.runSearch(0);
 
 		assertEquals(0, listVertices.get(0).intValue());
 		assertEquals(1, listVertices.get(1).intValue());
@@ -29,7 +29,7 @@ public class TestDepthFirstSearch {
 		Graph graph = new Graph(gStr);
 		DepthFirstSearch dfs = new DepthFirstSearch(graph); 
 		
-		List<Integer> listVertices = dfs.runSearch();
+		List<Integer> listVertices = dfs.runSearch(0);
 
 		assertEquals(0, listVertices.get(0).intValue());
 		assertEquals(1, listVertices.get(1).intValue());
