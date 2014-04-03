@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Graph {
-	private List<List<Integer>> adjList;
+public abstract class Graph {
+	protected List<List<Integer>> adjList;
 
 	public Graph(long numOfVertices) {
 		init(numOfVertices);
@@ -25,18 +25,18 @@ public class Graph {
 
 		for (int i = 0; i < adjStrList.length; i++) {
 			String vString = adjStrList[i];
-			List<Integer> vList = adjList.get(i);
-			extractVerticesFromLine(vList, vString);
+			extractVerticesFromLine(i, vString);
 		}
 	}
 
-	private void extractVerticesFromLine(List<Integer> vList, String vString) {
+	private void extractVerticesFromLine(Integer vertexLine, String vString) {
 		String vertices = vString.substring(vString.indexOf(":") + 1);
 		String[] arrayVertices = vertices.split(" ");
-		for (String vertex : arrayVertices) {
-			String vertexTrim = vertex.trim();
-			if (vertexTrim.length() > 0) {
-				vList.add(Integer.valueOf(vertexTrim));
+		for (String vertexStr : arrayVertices) {
+			String vertexStrTrim = vertexStr.trim();
+			if (vertexStrTrim.length() > 0) {
+				Integer anotherVertex = Integer.valueOf(vertexStrTrim);
+				addEgde(vertexLine, anotherVertex);
 			}
 		}
 	}
@@ -45,10 +45,8 @@ public class Graph {
 		return adjList.size();
 	}
 
-	public void addEgde(int left, int right) {
-		adjList.get(left).add(right);
-		adjList.get(right).add(left);
-	}
+	public abstract void addEgde(int left, int right);
+	protected abstract String getStringVertexConnect();
 
 	public Iterable<Integer> adj(int i) {
 		return adjList.get(i);
@@ -58,11 +56,9 @@ public class Graph {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int v = 0; v < adjList.size(); v++) {
 			for (int w : adjList.get(v)) {
-				stringBuilder.append(v + "-" + w);
+				stringBuilder.append(v + getStringVertexConnect() + w);
 			}
 		}
 		return stringBuilder.toString();
 	}
-
-
 }

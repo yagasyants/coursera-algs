@@ -45,5 +45,13 @@ public class StringIntConverter {
 		}
 		return intStr;
 	}
+	
+	public void printListToAnswer(List<Integer> vertices){
+		for(Integer vertex : vertices){
+			System.out.print(getVertex(vertex) + " ");
+		}
+		System.out.println();
+	}
+
 
 }

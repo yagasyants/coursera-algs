@@ -3,9 +3,9 @@ package com.yagasyants.courseraalgs.graph;
 import java.util.List;
 
 public class ConnectedComponents {
-	private Graph graph;
+	private UndirGraph graph;
 
-	public ConnectedComponents(Graph graph) {
+	public ConnectedComponents(UndirGraph graph) {
 		this.graph = graph;
 	}
 

@@ -9,7 +9,7 @@ public class TestConnectedComponents {
 	public void testDFS() {
 		String gStr = "0: 1 \n 1: 0 2 \n 2: 1\n 3: 4 5\n 4: 3 5\n 5: 3 4";
 
-		Graph graph = new Graph(gStr);
+		UndirGraph graph = new UndirGraph(gStr);
 		ConnectedComponents cc = new ConnectedComponents(graph); 
 		
 		Integer[] comps = cc.runSearch();

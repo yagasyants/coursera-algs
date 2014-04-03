@@ -5,7 +5,7 @@ import java.util.List;
 import com.yagasyants.courseraalgs.graph.BreadthFirstSearch;
 import com.yagasyants.courseraalgs.graph.ConnectedComponents;
 import com.yagasyants.courseraalgs.graph.DepthFirstSearch;
-import com.yagasyants.courseraalgs.graph.Graph;
+import com.yagasyants.courseraalgs.graph.UndirGraph;
 import com.yagasyants.courseraalgs.graph.StringIntConverter;
 
 public class Quiz1 {
@@ -14,28 +14,28 @@ public class Quiz1 {
 	
 	private static void runQuestion1() {
 		String intGraph = CONVERTER.toIntGraphString(getQuestion1Data());
-		Graph graph = new Graph(intGraph);
+		UndirGraph graph = new UndirGraph(intGraph);
 		DepthFirstSearch dfs = new DepthFirstSearch(graph); 
 
 		List<Integer> vertices = dfs.runSearch(0);
 		
-		printListToAnswer(vertices);
+		CONVERTER.printListToAnswer(vertices);
 	}
 	
 	private static void runQuestion2() {
 		String intGraph = CONVERTER.toIntGraphString(getQuestion2Data());
-		Graph graph = new Graph(intGraph);
+		UndirGraph graph = new UndirGraph(intGraph);
 		BreadthFirstSearch bfs = new BreadthFirstSearch(graph); 
 
 		List<Integer> vertices = bfs.runSearch();
 		
-		printListToAnswer(vertices);
+		CONVERTER.printListToAnswer(vertices);
 	}
 	
 	private static void runQuestion3() {
 		StringIntConverter converter = new StringIntConverter("A", "B", "C", "D", "E", "F", "G", "H", "I", "J");
 		String intGraph = converter.toIntGraphString(getQuestion3Data());
-		Graph graph = new Graph(intGraph);
+		UndirGraph graph = new UndirGraph(intGraph);
 		ConnectedComponents cc = new ConnectedComponents(graph); 
 
 		Integer[] components = cc.runSearch();
@@ -79,13 +79,6 @@ public class Quiz1 {
     "H:  D I \n" +
     "I:  D H \n" +
     "J:  E ";
-	}
-	
-	private static void printListToAnswer(List<Integer> vertices){
-		for(Integer vertex : vertices){
-			System.out.print(CONVERTER.getVertex(vertex) + " ");
-		}
-		System.out.println();
 	}
 	
 	public static void main(String[] args) {

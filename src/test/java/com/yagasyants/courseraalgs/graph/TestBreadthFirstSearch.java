@@ -11,7 +11,7 @@ public class TestBreadthFirstSearch {
 	public void testDFS() {
 		String gStr = "0: 2 3 \n 1: 2 \n 2: 0 1\n 3: 0";
 
-		Graph graph = new Graph(gStr);
+		UndirGraph graph = new UndirGraph(gStr);
 		BreadthFirstSearch dfs = new BreadthFirstSearch(graph); 
 		
 		List<Integer> listVertices = dfs.runSearch();

@@ -5,13 +5,14 @@ import java.util.List;
 
 public class DepthFirstSearch {
 	private Graph graph;
+	private boolean[] visited;
 
 	public DepthFirstSearch(Graph graph) {
 		this.graph = graph;
+		visited = new boolean[graph.getNumberOfVertices()];
 	}
 	
 	public List<Integer> runSearch(int vertex) {
-		boolean[] visited = new boolean[graph.getNumberOfVertices()];
 		List<Integer> listVisits = new ArrayList<>();
 		depthFirstVisit(vertex, visited, listVisits);
 

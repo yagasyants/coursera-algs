@@ -11,7 +11,7 @@ public class TestDepthFirstSearch {
 	public void testDFS() {
 		String gStr = "0: 1 \n 1: 0 2 \n 2: 1";
 
-		Graph graph = new Graph(gStr);
+		UndirGraph graph = new UndirGraph(gStr);
 		
 		DepthFirstSearch dfs = new DepthFirstSearch(graph); 
 		
@@ -26,7 +26,7 @@ public class TestDepthFirstSearch {
 	public void testDFSWithCycle() {
 		String gStr = "0: 1 \n 1: 0 ";
 
-		Graph graph = new Graph(gStr);
+		UndirGraph graph = new UndirGraph(gStr);
 		DepthFirstSearch dfs = new DepthFirstSearch(graph); 
 		
 		List<Integer> listVertices = dfs.runSearch(0);
