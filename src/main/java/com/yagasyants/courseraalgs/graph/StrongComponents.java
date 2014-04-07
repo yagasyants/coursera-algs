@@ -13,7 +13,7 @@ public class StrongComponents {
 	public Integer[] runSearch() {
 		List<Integer> reversedPostOrder = reversedPostOrder();
 		
-		Integer[] comps = new Integer[graph.getNumberOfVertices()];
+		Integer[] comps = new Integer[graph.V()];
 		DepthFirstSearch dfs = new DepthFirstSearch(graph);
 
 		int component = 0;
@@ -32,8 +32,8 @@ public class StrongComponents {
 	private List<Integer> reversedPostOrder(){
 		Digraph reversed = graph.reverse();
 		List<Integer> listReversedPO = new LinkedList<>();
-		boolean[] visited = new boolean[reversed.getNumberOfVertices()];
-		for (int i = 0; i < reversed.getNumberOfVertices(); i++) {
+		boolean[] visited = new boolean[reversed.V()];
+		for (int i = 0; i < reversed.V(); i++) {
 			if (!visited[i]) {
 				depthFirstVisit(i, visited, listReversedPO, reversed);
 			}

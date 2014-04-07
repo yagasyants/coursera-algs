@@ -8,8 +8,8 @@ public class TestStrongComponents {
 	@Test
 	public void testTopoOrderSimple() {
 		Digraph graph = new Digraph(3);
-		graph.addEgde(0, 1);
-		graph.addEgde(1, 0);
+		graph.addEdge(0, 1);
+		graph.addEdge(1, 0);
 		
 		StrongComponents algo = new StrongComponents(graph); 
 		
@@ -24,28 +24,28 @@ public class TestStrongComponents {
 	@Test
 	public void testTopoOrderFromExample() {
 		Digraph graph = new Digraph(13);
-		graph.addEgde(0, 1);
-		graph.addEgde(0, 5);
-		graph.addEgde(2, 0);
-		graph.addEgde(2, 3);
-		graph.addEgde(3, 2);
-		graph.addEgde(3, 5);
-		graph.addEgde(4, 2);
-		graph.addEgde(4, 3);
-		graph.addEgde(5, 4);
-		graph.addEgde(6, 0);
-		graph.addEgde(6, 4);
-		graph.addEgde(6, 8);
-		graph.addEgde(6, 9);
-		graph.addEgde(7, 6);
-		graph.addEgde(7, 9);
-		graph.addEgde(8, 6);
-		graph.addEgde(9, 10);
-		graph.addEgde(9, 11);
-		graph.addEgde(10, 12);
-		graph.addEgde(11, 4);
-		graph.addEgde(11, 12);
-		graph.addEgde(12, 9);
+		graph.addEdge(0, 1);
+		graph.addEdge(0, 5);
+		graph.addEdge(2, 0);
+		graph.addEdge(2, 3);
+		graph.addEdge(3, 2);
+		graph.addEdge(3, 5);
+		graph.addEdge(4, 2);
+		graph.addEdge(4, 3);
+		graph.addEdge(5, 4);
+		graph.addEdge(6, 0);
+		graph.addEdge(6, 4);
+		graph.addEdge(6, 8);
+		graph.addEdge(6, 9);
+		graph.addEdge(7, 6);
+		graph.addEdge(7, 9);
+		graph.addEdge(8, 6);
+		graph.addEdge(9, 10);
+		graph.addEdge(9, 11);
+		graph.addEdge(10, 12);
+		graph.addEdge(11, 4);
+		graph.addEdge(11, 12);
+		graph.addEdge(12, 9);
 		
 		StrongComponents algo = new StrongComponents(graph); 
 		

@@ -1,5 +1,4 @@
-package com.yagasyants.courseraalgs.graph;
-
+import com.yagasyants.courseraalgs.graph.Graph;
 
 
 public class Digraph extends Graph {

@@ -13,7 +13,7 @@ public class BreadthFirstSearch {
 	}
 
 	public List<Integer> runSearch() {
-		boolean[] visited = new boolean[graph.getNumberOfVertices()];
+		boolean[] visited = new boolean[graph.V()];
 		List<Integer> listVisits = new ArrayList<>();
 		Queue<Integer> queue = new LinkedList<>();
 		queue.add(0);

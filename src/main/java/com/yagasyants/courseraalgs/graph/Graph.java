@@ -36,16 +36,16 @@ public abstract class Graph {
 			String vertexStrTrim = vertexStr.trim();
 			if (vertexStrTrim.length() > 0) {
 				Integer anotherVertex = Integer.valueOf(vertexStrTrim);
-				addEgde(vertexLine, anotherVertex);
+				addEdge(vertexLine, anotherVertex);
 			}
 		}
 	}
 
-	public int getNumberOfVertices() {
+	public int V() {
 		return adjList.size();
 	}
 
-	public abstract void addEgde(int left, int right);
+	public abstract void addEdge(int left, int right);
 	protected abstract String getStringVertexConnect();
 
 	public Iterable<Integer> adj(int i) {

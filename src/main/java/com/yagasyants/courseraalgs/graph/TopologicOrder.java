@@ -12,9 +12,9 @@ public class TopologicOrder {
 	}
 
 	public List<Integer> runSearch() {
-		boolean[] visited = new boolean[graph.getNumberOfVertices()];
+		boolean[] visited = new boolean[graph.V()];
 		Stack<Integer> stack = new Stack<>();
-		for (int i = 0; i < graph.getNumberOfVertices(); i++) {
+		for (int i = 0; i < graph.V(); i++) {
 			if (!visited[i]) {
 				depthFirstVisit(i, visited, stack);
 			}

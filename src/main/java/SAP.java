@@ -1,13 +1,10 @@
 
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.yagasyants.courseraalgs.graph.Digraph;
-
 public class SAP {
-	private static final Integer UNKNOWN = -1;
+	private static final int UNKNOWN = -1;
 
 	private Digraph digraph;
 
@@ -31,16 +28,16 @@ public class SAP {
 		return findSAP(v, w)[0];
 	}
 
-	private Integer[] findSAP(Iterable<Integer> v, Iterable<Integer> w) {
-		Integer[] distToV = createEmptyArray();
+	private int[] findSAP(Iterable<Integer> v, Iterable<Integer> w) {
+		int[] distToV = createEmptyArray();
 		bfs(v, distToV);
 
-		Integer[] distToW = createEmptyArray();
+		int[] distToW = createEmptyArray();
 		bfs(w, distToW);
 
-		Integer[] sapAncLength = { UNKNOWN, UNKNOWN };
+		int[] sapAncLength = { UNKNOWN, UNKNOWN };
 
-		for (int i = 0; i < digraph.getNumberOfVertices(); i++) {
+		for (int i = 0; i < digraph.V(); i++) {
 			int distFromIToV = distToV[i];
 			int distFromIToW = distToW[i];
 
@@ -57,22 +54,22 @@ public class SAP {
 		return sapAncLength;
 	}
 
-	private Integer[] createEmptyArray() {
-		Integer[] array = new Integer[digraph.getNumberOfVertices()];
+	private int[] createEmptyArray() {
+		int[] array = new int[digraph.V()];
 		for (int i = 0; i < array.length; i++) {
 			array[i] = UNKNOWN;
 		}
 		return array;
 	}
 
-	private void bfs(Iterable<Integer> source, Integer[] distTo) {
+	private void bfs(Iterable<Integer> source, int[] distTo) {
 		Queue<Integer> queue = new LinkedList<>();
-		boolean[] visited = new boolean[digraph.getNumberOfVertices()];
+		boolean[] visited = new boolean[digraph.V()];
 
 		for (Integer sourceVertex : source) {
 			queue.add(sourceVertex);
 			visited[sourceVertex] = true;
-			
+
 			distTo[sourceVertex] = 0;
 		}
 
@@ -88,6 +85,5 @@ public class SAP {
 			}
 		}
 	}
-	
 
 }

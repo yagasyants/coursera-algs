@@ -9,7 +9,7 @@ public class DepthFirstSearch {
 
 	public DepthFirstSearch(Graph graph) {
 		this.graph = graph;
-		visited = new boolean[graph.getNumberOfVertices()];
+		visited = new boolean[graph.V()];
 	}
 	
 	public List<Integer> runSearch(int vertex) {

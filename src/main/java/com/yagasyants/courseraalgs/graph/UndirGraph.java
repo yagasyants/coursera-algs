@@ -11,7 +11,7 @@ public class UndirGraph extends Graph {
 		super(gStr);
 	}
 
-	public void addEgde(int left, int right) {
+	public void addEdge(int left, int right) {
 		adjList.get(left).add(right);
 		adjList.get(right).add(left);
 	}

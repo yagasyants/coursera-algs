@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.yagasyants.courseraalgs.graph.Digraph;
 
 public class TestSAP {
 
@@ -73,10 +72,10 @@ public class TestSAP {
 	@Test
 	public void testDigraphNoAnc(){
 		Digraph digraph = new Digraph(6);
-		digraph.addEgde(1, 0);
-		digraph.addEgde(1, 2);
-		digraph.addEgde(2, 3);
-		digraph.addEgde(4, 5);
+		digraph.addEdge(1, 0);
+		digraph.addEdge(1, 2);
+		digraph.addEdge(2, 3);
+		digraph.addEdge(4, 5);
 		
 		SAP sap = new SAP(digraph);
 		int anc = sap.ancestor(1, 5);
@@ -89,12 +88,12 @@ public class TestSAP {
 	@Test
 	public void testDigraphCycle(){
 		Digraph digraph = new Digraph(6);
-		digraph.addEgde(1, 2);
-		digraph.addEgde(2, 3);
-		digraph.addEgde(3, 4);
-		digraph.addEgde(4, 5);
-		digraph.addEgde(5, 0);
-		digraph.addEgde(0, 1);
+		digraph.addEdge(1, 2);
+		digraph.addEdge(2, 3);
+		digraph.addEdge(3, 4);
+		digraph.addEdge(4, 5);
+		digraph.addEdge(5, 0);
+		digraph.addEdge(0, 1);
 
 		SAP sap = new SAP(digraph);
 		int anc = sap.ancestor(1, 5);
@@ -115,30 +114,30 @@ public class TestSAP {
 	
 	private Digraph createDigraph1() {
 		Digraph digraph = new Digraph(13);
-		digraph.addEgde(1, 0);
-		digraph.addEgde(2, 0);
-		digraph.addEgde(3, 1);
-		digraph.addEgde(4, 1);
-		digraph.addEgde(5, 1);
-		digraph.addEgde(6, 1);
-		digraph.addEgde(7, 3);
-		digraph.addEgde(8, 3);
-		digraph.addEgde(9, 5);
-		digraph.addEgde(10, 5);
-		digraph.addEgde(11, 10);
-		digraph.addEgde(12, 10);
+		digraph.addEdge(1, 0);
+		digraph.addEdge(2, 0);
+		digraph.addEdge(3, 1);
+		digraph.addEdge(4, 1);
+		digraph.addEdge(5, 1);
+		digraph.addEdge(6, 1);
+		digraph.addEdge(7, 3);
+		digraph.addEdge(8, 3);
+		digraph.addEdge(9, 5);
+		digraph.addEdge(10, 5);
+		digraph.addEdge(11, 10);
+		digraph.addEdge(12, 10);
 		return digraph;
 	}
 
 	
 	private Digraph createDigraph2() {
 		Digraph digraph = new Digraph(6);
-		digraph.addEgde(1, 0);
-		digraph.addEgde(1, 2);
-		digraph.addEgde(2, 3);
-		digraph.addEgde(3, 4);
-		digraph.addEgde(4, 5);
-		digraph.addEgde(5, 0);
+		digraph.addEdge(1, 0);
+		digraph.addEdge(1, 2);
+		digraph.addEdge(2, 3);
+		digraph.addEdge(3, 4);
+		digraph.addEdge(4, 5);
+		digraph.addEdge(5, 0);
 		return digraph;
 	}
 

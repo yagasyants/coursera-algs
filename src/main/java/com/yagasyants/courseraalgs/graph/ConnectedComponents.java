@@ -10,10 +10,10 @@ public class ConnectedComponents {
 	}
 
 	public Integer[] runSearch() {
-		Integer[] comps = new Integer[graph.getNumberOfVertices()];
+		Integer[] comps = new Integer[graph.V()];
 
 		int component = 0;
-		for (int i = 0; i < graph.getNumberOfVertices(); i++) {
+		for (int i = 0; i < graph.V(); i++) {
 			if (comps[i] == null) {
 				DepthFirstSearch dfs = new DepthFirstSearch(graph);
 				List<Integer> vertexInComponent = dfs.runSearch(i);

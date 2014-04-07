@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.yagasyants.courseraalgs.graph.Digraph;
 
 public class WordNet {
 	private static final Integer UNKNOWN_ROOT = Integer.MIN_VALUE;
@@ -95,11 +94,11 @@ public class WordNet {
 		public void processLine(String strLine, int lineNumber) {
 			String[] arrayIds = strLine.split(",");
 			validateParts(strLine, arrayIds, 1);
-			Integer syn = Integer.valueOf(arrayIds[0]);
+			int syn = Integer.parseInt(arrayIds[0]);
 
 			for (int i = 1; i < arrayIds.length; i++) {
-				Integer hyp = Integer.parseInt(arrayIds[i]);
-				digraph.addEgde(syn, hyp);
+				int hyp = Integer.parseInt(arrayIds[i]);
+				digraph.addEdge(syn, hyp);
 			}
 		}
 
@@ -121,7 +120,7 @@ public class WordNet {
 		}
 	}
 
-	private void addNouns(Integer id, String nounsStr) {
+	private void addNouns(int id, String nounsStr) {
 		String[] nouns = nounsStr.trim().split(" ");
 
 		for (String noun : nouns) {
@@ -133,16 +132,16 @@ public class WordNet {
 	}
 
 	private void validatGraphIsRootedDAG() {
-		boolean[] visited = new boolean[digraph.getNumberOfVertices()];
+		boolean[] visited = new boolean[digraph.V()];
 		Set<Integer> inPath = new HashSet<>();
-		for (int i = 0; i < digraph.getNumberOfVertices(); i++) {
+		for (int i = 0; i < digraph.V(); i++) {
 			if (!visited[i]) {
 				validationDfs(i, visited, inPath);
 			}
 		}
 	}
 
-	private void validationDfs(Integer visit, boolean[] visited, Set<Integer> inPath) {
+	private void validationDfs(int visit, boolean[] visited, Set<Integer> inPath) {
 		if (!visited[visit]) {
 			checkRoot(visit);
 			checkCycle(visit, inPath);
@@ -158,13 +157,13 @@ public class WordNet {
 		}
 	}
 
-	private void checkCycle(Integer visit, Set<Integer> inPath) {
+	private void checkCycle(int visit, Set<Integer> inPath) {
 		if (inPath.contains(visit)) {
 			throw new IllegalArgumentException("The has cycle: " + inPath + ", " + visit);
 		}
 	}
 
-	private void checkRoot(Integer visit) {
+	private void checkRoot(int visit) {
 		Iterable<Integer> neighbors = digraph.adj(visit);
 		boolean isRoot = !neighbors.iterator().hasNext();
 		if (isRoot) {

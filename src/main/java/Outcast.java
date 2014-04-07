@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Outcast {
+	private static final int UNFOUND = -1;
 	private static final String KEY_SEPARATOR = "-";
 	private WordNet wordnet;
 
@@ -14,7 +15,7 @@ public class Outcast {
 	public String outcast(String[] nouns) {
 		Map<String, Integer> distances = new HashMap<>();
 		String outCast = "";
-		int maxDist = -1;
+		int maxDist = UNFOUND;
 
 		for (String nounToCheck : nouns) {
 			int distance = 0;
@@ -45,4 +46,5 @@ public class Outcast {
 			return nounB + KEY_SEPARATOR + nounA;
 		}
 	}
+	
 }
