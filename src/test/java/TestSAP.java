@@ -1,4 +1,4 @@
-package com.yagasyants.courseraalgs.progassmts.wordnet;
+
 
 import static org.junit.Assert.assertEquals;
 
@@ -70,6 +70,47 @@ public class TestSAP {
 		assertEquals(3, lengthSap);
 	}
 
+	@Test
+	public void testDigraphNoAnc(){
+		Digraph digraph = new Digraph(6);
+		digraph.addEgde(1, 0);
+		digraph.addEgde(1, 2);
+		digraph.addEgde(2, 3);
+		digraph.addEgde(4, 5);
+		
+		SAP sap = new SAP(digraph);
+		int anc = sap.ancestor(1, 5);
+		int lengthSap = sap.length(1, 5);
+		
+		assertEquals(-1, anc);
+		assertEquals(-1, lengthSap);
+	}
+
+	@Test
+	public void testDigraphCycle(){
+		Digraph digraph = new Digraph(6);
+		digraph.addEgde(1, 2);
+		digraph.addEgde(2, 3);
+		digraph.addEgde(3, 4);
+		digraph.addEgde(4, 5);
+		digraph.addEgde(5, 0);
+		digraph.addEgde(0, 1);
+
+		SAP sap = new SAP(digraph);
+		int anc = sap.ancestor(1, 5);
+		int lengthSap = sap.length(1, 5);
+		
+		assertEquals(1, anc);
+		assertEquals(2, lengthSap);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testDigraphOutOfBound(){
+		Digraph digraph = new Digraph(6);
+		SAP sap = new SAP(digraph);
+
+		sap.ancestor(1, 7);
+	}
 	
 	
 	private Digraph createDigraph1() {

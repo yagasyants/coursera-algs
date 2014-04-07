@@ -1,4 +1,4 @@
-package com.yagasyants.courseraalgs.progassmts.wordnet;
+
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -87,7 +87,7 @@ public class SAP {
 				}
 			}
 		}
-
 	}
+	
 
 }

@@ -1,4 +1,4 @@
-package com.yagasyants.courseraalgs.progassmts.wordnet;
+
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -6,8 +6,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,7 +18,8 @@ import com.yagasyants.courseraalgs.graph.Digraph;
 public class WordNet {
 	private static final Integer UNKNOWN_ROOT = Integer.MIN_VALUE;
 
-	private Map<String, Integer> nounToVertex = new HashMap<>();
+	private Map<String, List<Integer>> nounToVertex = new HashMap<>();
+	private List<String> synsets = new ArrayList<>();
 	private int root = UNKNOWN_ROOT;
 	private Digraph digraph;
 
@@ -27,7 +30,7 @@ public class WordNet {
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
-		
+
 		validatGraphIsRootedDAG();
 	}
 
@@ -76,6 +79,7 @@ public class WordNet {
 			String idStr = parts[0];
 			String nounsStr = parts[1];
 			validate(idStr, strLine, lineNumber);
+			synsets.add(nounsStr);
 
 			addNouns(lineNumber, nounsStr);
 		}
@@ -121,7 +125,10 @@ public class WordNet {
 		String[] nouns = nounsStr.trim().split(" ");
 
 		for (String noun : nouns) {
-			nounToVertex.put(noun, id);
+			if(!nounToVertex.containsKey(noun)){
+				nounToVertex.put(noun, new ArrayList<Integer>());
+			}
+			nounToVertex.get(noun).add(id);
 		}
 	}
 
@@ -139,7 +146,7 @@ public class WordNet {
 		if (!visited[visit]) {
 			checkRoot(visit);
 			checkCycle(visit, inPath);
-			
+
 			visited[visit] = true;
 			inPath.add(visit);
 
@@ -160,7 +167,7 @@ public class WordNet {
 	private void checkRoot(Integer visit) {
 		Iterable<Integer> neighbors = digraph.adj(visit);
 		boolean isRoot = !neighbors.iterator().hasNext();
-		if(isRoot){
+		if (isRoot) {
 			if (root == UNKNOWN_ROOT) {
 				root = visit;
 			} else {
@@ -177,6 +184,24 @@ public class WordNet {
 
 	public boolean isNoun(String string) {
 		return nounToVertex.containsKey(string);
+	}
+
+	public String sap(String nounA, String nounB) {
+		List<Integer> v = nounToVertex.get(nounA);
+		List<Integer> w = nounToVertex.get(nounB);
+		SAP sap = new SAP(digraph);
+		
+		Integer ancestor = sap.ancestor(v, w);
+		
+		return synsets.get(ancestor);
+	}
+	
+	public int distance(String nounA, String nounB){
+		List<Integer> v = nounToVertex.get(nounA);
+		List<Integer> w = nounToVertex.get(nounB);
+		SAP sap = new SAP(digraph);
+		
+		return sap.length(v, w);
 	}
 
 }
