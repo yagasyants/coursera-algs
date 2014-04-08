@@ -140,5 +140,40 @@ public class TestSAP {
 		digraph.addEdge(5, 0);
 		return digraph;
 	}
+	
+	@Test
+	public void testCheckTest1(){
+		String file = UtilsTestWordNet.getFullFileName("digraph-wordnet.txt");
+		In in = null;
+		
+		try{
+			in = new In(file);
+			Digraph digraph = new Digraph(in);
+			SAP sap = new SAP(digraph);
+			
+			int length = sap.length(72894, 12947);
+			
+			assertEquals(15, length);
+		}finally{
+			in.close();
+		}
+	}
 
+	@Test
+	public void testCheckTest5(){
+		String file = UtilsTestWordNet.getFullFileName("digraph1.txt");
+		In in = null;
+		
+		try{
+			in = new In(file);
+			Digraph digraph = new Digraph(in);
+			SAP sap = new SAP(digraph);
+			
+			int length = sap.length(1, 4);
+			
+			assertEquals(1, length);
+		}finally{
+			in.close();
+		}
+	}
 }

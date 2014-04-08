@@ -1,9 +1,7 @@
-
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class SAP {
+	private static final int INFINITY = Integer.MAX_VALUE;
 	private static final int UNKNOWN = -1;
 
 	private Digraph digraph;
@@ -29,21 +27,18 @@ public class SAP {
 	}
 
 	private int[] findSAP(Iterable<Integer> v, Iterable<Integer> w) {
-		int[] distToV = createEmptyArray();
-		bfs(v, distToV);
+		BreadthFirstDirectedPaths bfsV = new BreadthFirstDirectedPaths(digraph, v);
+		BreadthFirstDirectedPaths bfsW = new BreadthFirstDirectedPaths(digraph, w);
 
-		int[] distToW = createEmptyArray();
-		bfs(w, distToW);
-
-		int[] sapAncLength = { UNKNOWN, UNKNOWN };
+		int[] sapAncLength = { INFINITY, INFINITY };
 
 		for (int i = 0; i < digraph.V(); i++) {
-			int distFromIToV = distToV[i];
-			int distFromIToW = distToW[i];
+			int distFromIToV = bfsV.distTo(i);
+			int distFromIToW = bfsW.distTo(i);
 
-			if (distFromIToV != UNKNOWN && distFromIToW != UNKNOWN) {
+			if (distFromIToV != INFINITY && distFromIToW != INFINITY) {
 				int ancPathLength = distFromIToV + distFromIToW;
-				if (sapAncLength[1] == UNKNOWN || ancPathLength < sapAncLength[1]) {
+				if (sapAncLength[1] == INFINITY || ancPathLength < sapAncLength[1]) {
 					sapAncLength[0] = i;
 					sapAncLength[1] = ancPathLength;
 				}
@@ -51,39 +46,17 @@ public class SAP {
 			}
 		}
 
-		return sapAncLength;
+		return convertToUnknownIfInfinity(sapAncLength);
 	}
-
-	private int[] createEmptyArray() {
-		int[] array = new int[digraph.V()];
-		for (int i = 0; i < array.length; i++) {
-			array[i] = UNKNOWN;
-		}
-		return array;
-	}
-
-	private void bfs(Iterable<Integer> source, int[] distTo) {
-		Queue<Integer> queue = new LinkedList<>();
-		boolean[] visited = new boolean[digraph.V()];
-
-		for (Integer sourceVertex : source) {
-			queue.add(sourceVertex);
-			visited[sourceVertex] = true;
-
-			distTo[sourceVertex] = 0;
-		}
-
-		while (queue.size() > 0) {
-			Integer visit = queue.poll();
-			visited[visit] = true;
-			Iterable<Integer> neighbors = digraph.adj(visit);
-			for (Integer next : neighbors) {
-				if (!visited[next]) {
-					queue.add(next);
-					distTo[next] = distTo[visit] + 1;
-				}
-			}
+	
+	private int[] convertToUnknownIfInfinity(int[] sapAncLength){
+		if(sapAncLength[0] == INFINITY){
+			int[] unknown = { UNKNOWN, UNKNOWN };
+			return unknown;
+		}else{
+			return sapAncLength;
 		}
 	}
+
 
 }

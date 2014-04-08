@@ -1,11 +1,7 @@
 
 
-import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,30 +30,24 @@ public class WordNet {
 	}
 
 	private void processFile(String synFile, FileProcessor fileProcessor) throws IOException {
-		FileInputStream inputStream = null;
-		InputStreamReader inputStreamReader = null;
-		BufferedReader bufferedReader = null;
+		In in = null;
 		try {
-			inputStream = new FileInputStream(new File(synFile));
-			inputStreamReader = new InputStreamReader(inputStream);
-			bufferedReader = new BufferedReader(inputStreamReader);
+			in = new In(new File(synFile));
 
 			String strLine;
 			int lineNumber = 0;
-			while ((strLine = bufferedReader.readLine()) != null) {
+			while ((strLine = in.readLine()) != null) {
 				fileProcessor.processLine(strLine, lineNumber);
 
 				lineNumber++;
 			}
 			fileProcessor.postLineProcess(lineNumber);
 		} finally {
-			close(bufferedReader);
-			close(inputStreamReader);
-			close(inputStream);
+			close(in);
 		}
 	}
 
-	private void close(Closeable closable) throws IOException {
+	private void close(In closable) throws IOException {
 		if (closable != null) {
 			closable.close();
 		}
