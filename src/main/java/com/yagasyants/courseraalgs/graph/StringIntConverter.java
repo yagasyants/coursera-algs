@@ -52,6 +52,10 @@ public class StringIntConverter {
 		}
 		System.out.println();
 	}
+	
+	public int size(){
+		return arrayVertices.length;
+	}
 
 
 }
