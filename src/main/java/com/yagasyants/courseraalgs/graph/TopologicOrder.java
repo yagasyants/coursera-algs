@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Stack;
 
 public class TopologicOrder {
-	private Digraph graph;
+	private AbstractGraph graph;
 
-	public TopologicOrder(Digraph graph) {
+	public TopologicOrder(AbstractGraph graph) {
 		this.graph = graph;
 	}
 
@@ -34,7 +34,7 @@ public class TopologicOrder {
 	private void depthFirstVisit(Integer visit, boolean[] visited, Stack<Integer> stack) {
 		if (!visited[visit]) {
 			visited[visit] = true;
-			Iterable<Integer> neighbors = graph.adj(visit);
+			Iterable<Integer> neighbors = graph.adjVertices(visit);
 			for (Integer next : neighbors) {
 				depthFirstVisit(next, visited, stack);
 			}

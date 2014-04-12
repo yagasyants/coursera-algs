@@ -1,8 +1,10 @@
-package com.yagasyants.courseraalgs.mst;
+package com.yagasyants.courseraalgs.edgeweighted;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.yagasyants.courseraalgs.edgeweighted.Edge;
 
 public class TestEdge {
 	

@@ -1,10 +1,14 @@
-package com.yagasyants.courseraalgs.mst;
+package com.yagasyants.courseraalgs.edgeweighted;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.Iterator;
 
 import org.junit.Test;
+
+import com.yagasyants.courseraalgs.edgeweighted.Edge;
+import com.yagasyants.courseraalgs.edgeweighted.EdgeWeightedGraph;
+import com.yagasyants.courseraalgs.edgeweighted.PrimMST;
 
 public class TestPrimMST {
 	@Test

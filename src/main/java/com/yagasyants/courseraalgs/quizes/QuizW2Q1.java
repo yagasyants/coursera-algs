@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.mockito.internal.util.Primitives;
 
+import com.yagasyants.courseraalgs.edgeweighted.Edge;
+import com.yagasyants.courseraalgs.edgeweighted.EdgeWeightedGraph;
+import com.yagasyants.courseraalgs.edgeweighted.KruskalMST;
+import com.yagasyants.courseraalgs.edgeweighted.PrimMST;
 import com.yagasyants.courseraalgs.graph.StringIntConverter;
-import com.yagasyants.courseraalgs.mst.Edge;
-import com.yagasyants.courseraalgs.mst.EdgeWeightedGraph;
-import com.yagasyants.courseraalgs.mst.KruskalMST;
-import com.yagasyants.courseraalgs.mst.PrimMST;
 
 public class QuizW2Q1 {
 	private static void runQuestion1() {

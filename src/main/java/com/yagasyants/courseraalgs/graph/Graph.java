@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class Graph {
+public abstract class Graph implements AbstractGraph{
 	protected List<List<Integer>> adjList;
 
 	public Graph(long numOfVertices) {
@@ -51,6 +51,12 @@ public abstract class Graph {
 	public Iterable<Integer> adj(int i) {
 		return adjList.get(i);
 	}
+	
+	public Iterable<Integer> adjVertices(int v){
+		return adj(v);
+	}
+	
+
 
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
